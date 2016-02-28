@@ -100,6 +100,15 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         }
 
+        // fp_puser_homepage
+        if (rtrim($pathinfo, '/') === '') {
+            if (substr($pathinfo, -1) !== '/') {
+                return $this->redirect($pathinfo.'/', 'fp_puser_homepage');
+            }
+
+            return array (  '_controller' => 'FPPuserBundle\\Controller\\DefaultController::indexAction',  '_route' => 'fp_puser_homepage',);
+        }
+
         // homepage
         if (rtrim($pathinfo, '/') === '') {
             if (substr($pathinfo, -1) !== '/') {
