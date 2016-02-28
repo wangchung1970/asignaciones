@@ -100,13 +100,17 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         }
 
-        // fp_puser_homepage
-        if (rtrim($pathinfo, '/') === '') {
-            if (substr($pathinfo, -1) !== '/') {
-                return $this->redirect($pathinfo.'/', 'fp_puser_homepage');
+        if (0 === strpos($pathinfo, '/user')) {
+            // fp_user_index
+            if ($pathinfo === '/user/index') {
+                return array (  '_controller' => 'FPPuserBundle\\Controller\\UserController::indexAction',  '_route' => 'fp_user_index',);
             }
 
-            return array (  '_controller' => 'FPPuserBundle\\Controller\\DefaultController::indexAction',  '_route' => 'fp_puser_homepage',);
+            // fp_user_articles
+            if (0 === strpos($pathinfo, '/user/articles') && preg_match('#^/user/articles(?:/(?P<page>\\d+))?$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'fp_user_articles')), array (  '_controller' => 'FPPuserBundle\\Controller\\UserController::articlesAction',  'page' => 1,));
+            }
+
         }
 
         // homepage

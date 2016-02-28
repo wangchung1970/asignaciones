@@ -1,3 +1,19 @@
-fp_puser_homepage:
-    path:     /
-    defaults: { _controller: FPPuserBundle:Default:index }
+fp_user_index:
+    path:   /user/index
+    defaults: { _controller: FPPuserBundle:User:index }
+
+fp_user_add:
+    path:   /user/add
+    defaults: { _controller: FPPuserBundle:User:add }
+
+fp_user_edit:
+    path:   /user/edit/{id}
+    defaults: { _controller: FPPuserBundle:User:edit }
+
+fp_user_view:
+    path:   /user/view/{id}
+    defaults: { _controller: FPPuserBundle:User:view }
+
+fp_user_delete:
+    path:   /user/delete/{id}
+    defaults: { _controller: FPPuserBundle:User:delete }
